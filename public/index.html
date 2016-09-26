@@ -15,8 +15,15 @@
       $(document).ready(function()
       {
          $("#mostrarmodal").modal("show");
+         $('#myModal').modal.close();
+        
       });
+
+     
     </script>
+
+
+
   </head>
   <body  ng-app="chatApp">
 
@@ -49,14 +56,23 @@
               <h3>Change Name</h3>
            </div>
            <div  class="modal-body">
+               <div class="form-group">
+                <p>Write your name for change</p>   
+                <label for="user">Your current name: <a class="small">{{name}}</a> </label> 
+
+              </div>
                <form ng-submit='changeName()'>
                   <input ng-model='newName' placeholder="Write your name">
-                  <button type="submit" class="btn btn-warning" >Save</button>
                </form> 
            </div>
+            <div class="modal-footer">
+            <button  id="myModal"  ng-click="changeName()" type="submit" class="btn btn-warning" >Save</button>
+            
+            </div>
         </div>
      </div>
   </div>
+
   
   
 <!-- <form ng-submit='changeName()'>
