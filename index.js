@@ -1,11 +1,14 @@
 
 'use strict'
 
+
+
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var express = require('express');
 var path = require('path');
+var  socket = require('./routes/socket.js');
 
 
 
@@ -17,14 +20,16 @@ app.get('*', function(req, res) {
 });
 
 
-io.on('connection', function(socket){
+/*io.on('connection', function(socket){
 	console.log('Usuario conectado');
 
 	 socket.on('send message', function(msg) {
 	    io.emit('send message', msg);
 	    console.log(msg);
 	  	});
-});
+});*/
+io.sockets.on('connection', socket);
+
 
 http.listen(3000, function(){
   console.log('listening on *:3000');
