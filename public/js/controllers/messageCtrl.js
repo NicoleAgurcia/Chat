@@ -27,9 +27,23 @@ app.controller('messagectrl', ["$socket","$scope",
 		    $scope.users.push(data.name);
 	  	});
 
+	  	  $socket.on('user left', function (data) {
+		    $scope.messages.push({
+		      user: 'chatroom',
+		      text: 'User ' + data.name + ' has left.'
+		    });
+		    var i, user;
+		    for (i = 0; i < $scope.users.length; i++) {
+		      user = $scope.users[i];
+		      if (user === data.name) {
+		        $scope.users.splice(i, 1);
+		        break;
+		      }
+		    }
+		  });
+
 
 	  	  var changeName = function (oldName, newName) {
-		    // rename user in list of users
 		    var i;
 		    for (i = 0; i < $scope.users.length; i++) {
 		      if ($scope.users[i] === oldName) {
@@ -61,14 +75,6 @@ app.controller('messagectrl', ["$socket","$scope",
 
 
 		$scope.sendMessage = function () {
-		/*	let struct = {
-			message: $scope.message,
-			date: new Date()
-			}
-
-		  	$socket.emit('send message', struct );	  	
-		  	$scope.messages.push($scope.message);
-		  	$scope.message = '';*/
 			$socket.emit('send message', {
       			message: $scope.message
     		});
