@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Elchat",
   "main": "index.js",
+   "scripts": {
+    "start": "node index.js"
+  },
   "author": "Nicole",
   "license": "ISC",
   "dependencies": {
